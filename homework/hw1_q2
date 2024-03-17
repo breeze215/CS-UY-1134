@@ -1,0 +1,42 @@
+#Q2
+def shift(lst, k, direction="left"):
+    if direction=="left":
+        start=0
+        end=k-1
+        while start<end:
+            lst[start],lst[end]=lst[end],lst[start]
+            start+=1
+            end-=1
+        start=k
+        end=len(lst)-1
+        while start<end:
+            lst[start],lst[end]=lst[end],lst[start]
+            start+=1
+            end-=1
+        start=0
+        end=len(lst)-1
+        while start<end:
+            lst[start],lst[end]=lst[end],lst[start]
+            start+=1
+            end-=1
+        return lst
+    elif direction=="right":
+        start=len(lst)-k
+        end=len(lst)-1
+        while start<end:
+            lst[start],lst[end]=lst[end],lst[start]
+            start+=1
+            end-=1
+        start=0
+        end=len(lst)-k-1
+        while start<end:
+            lst[start],lst[end]=lst[end],lst[start]
+            start+=1
+            end-=1
+        start=0
+        end=len(lst)-1
+        while start<end:
+            lst[start],lst[end]=lst[end],lst[start]
+            start+=1
+            end-=1
+        return lst
