@@ -1,0 +1,28 @@
+def count_lowercase(s,low,high):
+    if low==high:
+        if s[low].islower():
+            return 1
+        else:
+            return 0
+    else:
+        curr=count_lowercase(s,low+1,high)
+        if s[low].islower():
+            return curr+1
+        else:
+            return curr
+def is_number_of_lowercase_even(s,low,high):
+    if low>=high:
+        return 1
+    else:
+        curr=count_lowercase(s,low+1,high)
+        if s[low].islower():
+            curr+=1
+            if (curr)%2==0:
+                return True
+            else:
+                return False
+        else:
+            if (curr)%2==0:
+                return True
+            else:
+                return False
