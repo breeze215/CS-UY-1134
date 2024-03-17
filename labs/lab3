@@ -1,0 +1,39 @@
+def reverse_list(lst,low=None,high=None):
+    if low==None and high==None:
+        low=0
+        high=len(lst)-1
+    while low<=high:
+        lst[low],lst[high]=lst[high],lst[low]
+        low+=1
+        high-=1
+def move_zeros(nums):
+    low=0
+    high=low+1
+    while high<=len(nums)-1:
+        if nums[high]!=0:
+            nums[low],nums[high]=nums[high],nums[low]
+            low+=1
+            high+=1
+        elif nums[high]==0:
+            high+=1
+def shift(lst,k):
+    reverse_list(lst,0,len(lst)-k-1)
+    reverse_list(lst,len(lst)-k,len(lst)-1)
+    reverse_list(lst,0,len(lst)-1)
+def subarray(nums,k):
+    if k==len(nums):
+        return sum(nums)
+    else:
+        low,high,counter,highest=0,0,0,0
+        while high<=len(nums)-1:
+            if (high-low)==k:
+                counter+=nums[high]
+                if counter>highest:
+                    highest=counter
+                counter=0
+                low+=1
+                high=low+1
+            else:
+                counter+=nums[high]
+                high+=1
+        return highest
