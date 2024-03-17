@@ -1,0 +1,10 @@
+def permutations(lst,low,high):
+    if low==high:
+        return [[lst[low]]]
+    else:
+        res=[]
+        for i in range(high-low+1):
+            for elem in permutations(lst,low+1,high):
+                elem.insert(i,lst[low])
+                res.append(elem)
+        return res
