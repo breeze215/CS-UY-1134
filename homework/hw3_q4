@@ -1,0 +1,9 @@
+def remove_all(lst,value):
+    go_foward=0
+    for i in range(len(lst)):
+        if lst[i]==value:
+            go_foward+=1
+        else:
+            lst[i-go_foward]=lst[i]
+    for i in range(go_foward):
+        lst.pop()
