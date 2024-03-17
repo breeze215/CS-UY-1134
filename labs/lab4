@@ -1,0 +1,70 @@
+def is_palindrome(s):
+    z=is_palindrome_helper(s,0,len(s)-1)
+    return z
+def is_palindrome_helper(s,low,high):
+    if low==high:
+        return True
+    else:
+        return is_palindrome_helper(s,low+1,high-1) and (s[low]==s[high])
+def reverse_vowels(input_str):
+    list_str=list(input_str)
+    low=0
+    high=len(list_str)-1
+    while low<=high:
+        if list_str[low] in 'aeiou' and list_str[high] in 'aeiou':
+            list_str[low],list_str[high]=list_str[high],list_str[low]
+            low+=1
+            high-=1
+        elif list_str[low] in 'aeiou' and list_str[high] not in 'aeiou':
+            high-=1
+        elif list_str[low] not in 'aeiou' and list_str[high] in 'aeiou':
+            low+=1
+        else:
+            low+=1
+            high-=1
+    return "".join(list_str)
+def find_missing(lst):
+    if len(lst)==1:
+        return 0
+    else:
+        low=0
+        high=len(lst)-1
+        while low<=high:
+            mid=(low+high)//2
+            if lst[mid]+1!=lst[mid+1]:
+                return lst[mid]+1
+            elif lst[mid]+(len(lst)-1-mid)!=lst[len(lst)-1]:
+                low=mid+1
+            else:
+                high=mid-1
+def find_missing_unsorted(lst):
+    estimated_sum=(len(lst)*(len(lst)+1))//2
+    actual_sum=sum(lst)
+    return estimated_sum-actual_sum
+def find_pivot(lst):
+    low=0
+    high=len(lst)-1
+    while low<=high:
+        mid=(low+high)//2
+        if lst[mid]>lst[mid+1]:
+            return mid+1
+        elif lst[mid]>lst[low]:
+            low=mid+1
+        else:
+            high=mid-1
+def shift_binary_search(lst,target):
+    pivot=find_pivot(lst)
+    if target>lst[len(lst)-1]:
+        low=0
+        high=pivot-1
+    else:
+        low=pivot
+        high=len(lst)-1
+    while low<=high:
+        mid=(low+high)//2
+        if lst[mid]==target:
+            return mid
+        elif lst[mid]>target:
+            high=mid-1
+        else:
+            low=mid+1
