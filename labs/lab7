@@ -1,0 +1,45 @@
+def intersectionOfLst(lst1,lst2):
+    res=[]
+    max1=max(lst1)
+    max2=max(lst2)
+    lst=[0 for i in range(max(max1,max2)+2)]
+    for i in range(len(lst1)):
+        lst[lst1[i]]+=1
+    for i in range(len(lst2)):
+        lst[lst2[i]]+=1
+    for i in range(len(lst)):
+        if lst[i]>1:
+            res.append(i)
+    return res
+def isPowerOfTwo(n):
+    if n==1:
+        return True
+    else:
+        return isPowerOfTwo(n//2) and (n%2==0)
+
+def split_parity(lst,low,high):
+    if low==high:
+        return lst[low]
+    else:
+        if lst[low]%2==0 and lst[high]%2==0:
+            split_parity(lst,low+1,high)
+        elif lst[low]%2!=0 and lst[high]%2!=0:
+            split_parity(lst,low,high-1)
+        elif lst[low]%2==0 and lst[high]%2!=0:
+            split_parity(lst,low+1,high-1)
+        elif lst[low]%2!=0 and lst[high]%2==0:
+            split_parity(lst,low+1,high-1)
+            lst[low],lst[high]=lst[high],lst[low]
+def nested_sum(lst):
+    if isinstance(lst,int):
+        return lst
+    else:
+        total=0
+        for i in lst:
+            total+=nested_sum(i)
+        return total
+def nested_depth_level(lst):
+    if isinstance(lst,list):
+        return 1+max(nested_depth_level(elem) for elem in lst)
+    else:
+        return 0
