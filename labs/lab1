@@ -1,0 +1,62 @@
+def can_construct(word,letters):
+    lst=list(word)
+    lst1=list(letters)
+    for i in range(len(lst1)):
+        if lst1[i] in lst:
+            lst.remove(lst1[i])
+    if len(lst)==0:
+        return True
+    else:
+        return False
+class Complex:
+    def __init__(self,a,b):
+        self.a=a
+        self.b=b
+    def __add__(self,other):
+        c=self.a+other.a
+        d=self.b+other.b
+        new=Complex(c,d)
+        return new
+    def __sub__(self,other):
+        c=self.a-other.a
+        d=self.b-other.b
+        new=Complex(c,d)
+        return new
+    def __mul__(self,other):
+        c=(self.a*other.a)+(self.b*other.b*-1)
+        d=(self.a*other.b)+(other.a*self.b)
+        new=Complex(c,d)
+        return new
+    def __repr__(self):
+        return str(self.a)+" + "+str(self.b)+"i"
+    def __iadd__(self,other):
+        self.a=self.a+other.a
+        self.b=self.b+other.b
+        return self
+import random
+def create_permutation(n):
+    lst=[]
+    while len(lst)<n:
+        random_num=random.randint(0,n-1)
+        if random_num not in lst:
+            lst.append(random_num)
+    return lst
+def scramble_word(word):
+    lst1=['0' for i in range(len(word))]
+    lst2=list(word)
+    lst=create_permutation(len(word))
+    for i in range(len(lst)):
+        lst1[i]=lst2[lst[i]]
+    return "".join(lst1)
+def guessing_game(word):
+    new=scramble_word(word)
+    print("Unscramble the word: ", new)
+    rerun=True
+    tries=0
+    while tries<3 and rerun==True:
+        strr=str(input("enter the word: "))
+        if strr==word:
+            print("you got it")
+            rerun=False
+        else:
+            tries+=1
