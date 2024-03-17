@@ -1,0 +1,6 @@
+#Q4a
+lst1=[10**x for x in range(6)]
+#Q4b
+lst2=[i*(i+1) for i in range(10)]
+#Q4c
+lst3=[chr(i) for i in range(ord('a'),ord('z')+1)]
