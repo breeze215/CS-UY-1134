@@ -1,0 +1,49 @@
+def sum_to(n):
+    if n==1:
+        return 1
+    else:
+        prev=sum_to(n-1)
+        return (n+prev)
+def product_evens(n):
+    if n==0:
+        return 1
+    else:
+        prev=product_evens(n-2)
+        return prev*n
+def find_max(lst,low,high):
+    if low==high:
+        return lst[low]
+    else:
+        prev=find_max(lst,low+1,high)
+        if prev>lst[low]:
+            return prev
+        else:
+            return lst[low]
+def is_palindrome(s,low,high):
+    if low==high:
+        return s[low]
+    else:
+        return is_palindrome(s,low+1,high-1) and (s[low]==s[high])
+def binary_search(lst,low,high,val):
+    if low==high:
+        return lst[low]
+    else:
+        mid=(low+high)//2
+        if lst[mid]==val:
+            return mid
+        elif lst[mid]>val:
+            return binary_search(lst,low,mid-1,val)
+        else:
+            return binary_search(lst,mid+1,high,val)
+def vc_count(word,low,high):
+    if low==high:
+        if word[low] in 'aeiouAEIOU':
+            return (1,0)
+        else:
+            return (0,1)
+    else:
+        prev=vc_count(word,low+1,high)
+        if word[low] in 'aeiouAEIOU':
+            return (prev[0]+1,prev[1])
+        else:
+            return (prev[0],prev[1]+1)
