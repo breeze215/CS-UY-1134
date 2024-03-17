@@ -1,0 +1,13 @@
+def appearances(s,low,high):
+    if len(s)==0:
+        return {} 
+    if low==high:
+        return {s[low]:1}
+    else:
+        prev=appearances(s,low+1,high)
+        if s[low] not in prev:
+            prev[s[low]]=1
+            return prev
+        else:
+            prev[s[low]]+=1
+            return prev
