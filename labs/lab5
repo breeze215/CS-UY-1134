@@ -1,0 +1,120 @@
+import ctypes  # provides low-level arrays
+def make_array(n):
+    return (n * ctypes.py_object)()
+
+class ArrayList:
+    def __init__(self,iterr=None):
+        if iterr==None:
+            self.data_arr = make_array(1)
+            self.capacity = 1
+            self.n = 0
+        else:
+            self.data_arr=make_array(len(iterr))
+            for i in range(len(iterr)):
+                self.data_arr[i]=iterr[i]
+            self.capacity=len(iterr)
+            self.n=len(iterr)
+
+    def __len__(self):
+        return self.n
+
+
+    def append(self, val):
+        if (self.n == self.capacity):
+            self.resize(2 * self.capacity)
+        self.data_arr[self.n] = val
+        self.n += 1
+
+
+    def resize(self, new_size):
+        new_array = make_array(new_size)
+        for i in range(self.n):
+            new_array[i] = self.data_arr[i]
+        self.data_arr = new_array
+        self.capacity = new_size
+
+
+    def __getitem__(self, ind):
+        if (not (-self.n <= ind <= self.n - 1)):
+            raise IndexError('invalid index')
+        if ind<0:
+            ind=self.n+ind
+        return self.data_arr[ind]
+
+
+    def __setitem__(self, ind, val):
+        if (not (-self.n <= ind <= self.n - 1)):
+            raise IndexError('invalid index')
+        if ind<0:
+            ind=self.n+ind
+        self.data_arr[ind] = val
+
+
+    def __iter__(self):
+        for i in range(len(self)):
+            yield self.data_arr[i]  #could also yield self[i]
+
+
+    def extend(self, iter_collection):
+        for elem in iter_collection:
+            self.append(elem)
+            
+    def __repr__(self):
+        new_array=make_array(self.n)
+        for i in range(self.n):
+            new_array[i]=str(self.data_arr[i])
+        return "[" + ", ".join(new_array) + "]"
+    
+    def __add__(self,other):
+        new_arr=ArrayList()
+        new_arr.data_arr=make_array(self.n+other.n)
+        for i in range(self.n):
+            new_arr.append(self.data_arr[i])
+        for i in range(other.n):
+            new_arr.append(other.data_arr[i])
+        return new_arr
+            
+    def __iadd__(self,other):
+        for i in range(other.n):
+            self.append(other.data_arr[i])
+        return self
+    
+    def __mul__(self,k):
+        new=ArrayList()
+        new.data_arr=make_array(self.n*k)
+        for i in range(k):
+            new.extend(self)
+        return new
+    
+    def __rmul__(self,k):
+        return self*k
+
+    def remove(self,val):
+        index=-1
+        rerun=True
+        for i in range(self.n):
+            if self.data_arr[i]==val and rerun==True:
+                index=i
+                rerun=False
+        if index==-1:
+            raise ValueError("Value not found")
+        else:
+            if index==self.n-1:
+                self.data_arr[index]=None
+                self.n-=1
+            else:
+                for i in range(index,self.n-1):
+                    self.data_arr[i]=self.data_arr[i+1]
+                self.data_arr[self.n-1]=None
+                self.n-=1
+
+    def removeAll(self,val):
+        foward_step=0
+        for i in range(self.n):
+            if self.data_arr[i]==val:
+                foward_step+=1
+            else:
+                self.data_arr[i-foward_step]=self.data_arr[i]
+        for i in range(foward_step):
+            self.data_arr[self.n-1]=None
+            self.n-=1
