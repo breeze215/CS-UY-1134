@@ -1,0 +1,19 @@
+#Q3a
+def sum_of_squares(n):
+    sum_product=0
+    for i in range(n-1,0,-1):
+        sum_product+=(i**2)
+    return sum_product
+#Q3b
+def sum_of_squares_improved(n):
+    return sum(i**2 for i in range(n-1,0,-1))
+#Q3c
+def sum_of_odd_squares(n):
+    sum_product=0
+    for i in range(n-1,0,-1):
+        if i%2!=0:
+            sum_product+=(i**2)
+    return sum_product
+#Q3d
+def sum_of_odd_squares_improved(n):
+    return sum(i**2 for i in range(n-1,0,-1) if i%2!=0)
