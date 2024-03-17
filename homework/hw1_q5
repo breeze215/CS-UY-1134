@@ -1,0 +1,5 @@
+def fibs(n):
+    first,second=0,1
+    for i in range(n):
+        yield second
+        first,second=second,first+second
