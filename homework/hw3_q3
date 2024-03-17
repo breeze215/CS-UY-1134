@@ -1,0 +1,9 @@
+def find_duplicates(lst):
+    duplicate_lst=[]
+    counting_lst=[0 for i in range(len(lst))]
+    for i in range(len(lst)):
+        counting_lst[lst[i]]+=1
+    for i in range(len(counting_lst)):
+        if counting_lst[i]>1:
+            duplicate_lst.append(i)
+    return duplicate_lst
